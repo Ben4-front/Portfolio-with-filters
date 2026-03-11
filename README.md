@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+Портфолио с фильтрами
+1. Описание задания
+Вам предстоит создать веб-приложение для отображения портфолио проектов с возможностью их фильтрации по категориям. Основная цель — отработать навыки управления состоянием и взаимодействия компонентов в React. Приложение должно быть реализовано как набор компонентов с чётким разделением ответственности между ними. Внешний вид и функциональность должны соответствовать макету на изображении:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+portfolio-all
 
-## Available Scripts
+2. Состав компонентов
+Архитектура приложения должна состоять из трёх компонентов:
 
-In the project directory, you can run:
+Portfolio (компонент с состоянием): главный компонент, который управляет логикой всего приложения. Он хранит в себе состояние (активный фильтр) и передаёт данные и функции дочерним компонентам.
 
-### `npm start`
+Toolbar (компонент без состояния): отвечает за отображение панели с кнопками-фильтрами. Получает список фильтров, информацию о выбранном фильтре и функцию для обработки клика.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+ProjectList (компонент без состояния): отвечает исключительно за отображение списка карточек проектов, которые он получает от родительского компонента.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. Функциональные требования
+1. Инициализация:
 
-### `npm test`
+Компонент Portfolio при инициализации содержит полный список проектов и устанавливает фильтр по умолчанию в "All".
+2. Взаимодействие Portfolio и Toolbar:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Portfolio передаёт в Toolbar список уникальных категорий для фильтров через пропс filters.
 
-### `npm run build`
+Portfolio передаёт в Toolbar текущий активный фильтр через пропс selected.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Portfolio передаёт в Toolbar функцию-обработчик для смены фильтра через пропс onSelectFilter.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Пример использования компонента Toolbar:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<Toolbar
+  filters={["All", "Websites", "Flayers", "Business Cards"]}
+  selected="All"
+  onSelectFilter={(filter) => {console.log(filter);}}/>
+В этом примере при выборе фильтра его название будет выведено в консоль. Например, «Business Cards».
 
-### `npm run eject`
+3. Обработка действий пользователя:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+При нажатии на кнопку фильтра в Toolbar вызывается переданный обработчик onSelectFilter, который получает в качестве аргумента название выбранной категории (например, "Websites").
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+В Toolbar активный фильтр должен визуально выделяться (например, другим цветом фона или текста).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. Управление состоянием:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Получив новый фильтр, Portfolio обновляет своё внутреннее состояние (state), сохраняя новое значение активного фильтра.
+5. Фильтрация и отображение проектов:
 
-## Learn More
+Компонент Portfolio фильтрует общий список проектов в соответствии с активным фильтром из своего состояния.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Отфильтрованный список проектов передаётся в компонент ProjectList через пропс projects.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+ProjectList отображает полученный список проектов.
 
-### Code Splitting
+Пример: portfolio-cards.png
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+4. Требования к коду
+Компонент Portfolio должен быть реализован как классовый компонент для управления состоянием.
 
-### Analyzing the Bundle Size
+Компоненты Toolbar и ProjectList должны быть функциональными (stateless) компонентами.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Для передачи данных от родителя к дочерним компонентам используйте пропсы (props).
 
-### Making a Progressive Web App
+Для передачи данных от дочернего компонента (Toolbar) к родителю (Portfolio) используйте механизм обратного вызова (callback function).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Набор данных для отображения
+5. Критерии оценивания
+Зачёт:
 
-### Advanced Configuration
+Приложение полностью разделено на три компонента (Portfolio, Toolbar, ProjectList).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Состояние (state) хранится и изменяется только в главном компоненте Portfolio.
 
-### Deployment
+Данные и функции-обработчики корректно передаются через пропсы.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Фильтрация проектов работает при клике на кнопки, список обновляется.
 
-### `npm run build` fails to minify
+Активный фильтр визуально выделен.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+На доработку:
+
+Архитектура приложения не соответствует заданию (неверное количество или иерархия компонентов).
+
+Обнаружены ошибки в управлении состоянием (например, state используется в Toolbar или ProjectList).
+
+Приложение не реагирует на действия пользователя или работает с ошибками.
+
+Внешний вид не соответствует макету (например, активный фильтр не выделен).
