@@ -6,7 +6,6 @@ const Toolbar = ({ filters, selected, onSelectFilter }) => {
     <div className="toolbar">
       {filters.map((filter) => {
         const className = filter === selected ? 'filter-btn active' : 'filter-btn';
-        
         return (
           <button
             key={filter}

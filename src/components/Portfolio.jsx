@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Toolbar from './Toolbar';
 import ProjectList from './ProjectList';
-import { projectsData } from '../data/data';
-import '../App.css'; 
+import { projectsData } from '../data/data'; // Проверьте этот путь
+import '../App.css'; // Подключаем стили
 
 class Portfolio extends Component {
   constructor(props) {
@@ -10,7 +10,6 @@ class Portfolio extends Component {
     this.state = {
       selected: 'All',
     };
-    
     this.filters = ["All", "Websites", "Flayers", "Business Cards"];
   }
 
@@ -20,7 +19,6 @@ class Portfolio extends Component {
 
   render() {
     const { selected } = this.state;
-    
     const filteredProjects = selected === 'All' 
       ? projectsData 
       : projectsData.filter(project => project.category === selected);
@@ -39,4 +37,3 @@ class Portfolio extends Component {
 }
 
 export default Portfolio;
-

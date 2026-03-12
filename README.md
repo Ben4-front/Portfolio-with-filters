@@ -1,86 +1,16 @@
-Портфолио с фильтрами
-1. Описание задания
-Вам предстоит создать веб-приложение для отображения портфолио проектов с возможностью их фильтрации по категориям. Основная цель — отработать навыки управления состоянием и взаимодействия компонентов в React. Приложение должно быть реализовано как набор компонентов с чётким разделением ответственности между ними. Внешний вид и функциональность должны соответствовать макету на изображении:
+# React + Vite
 
-portfolio-all
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-2. Состав компонентов
-Архитектура приложения должна состоять из трёх компонентов:
+Currently, two official plugins are available:
 
-Portfolio (компонент с состоянием): главный компонент, который управляет логикой всего приложения. Он хранит в себе состояние (активный фильтр) и передаёт данные и функции дочерним компонентам.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-Toolbar (компонент без состояния): отвечает за отображение панели с кнопками-фильтрами. Получает список фильтров, информацию о выбранном фильтре и функцию для обработки клика.
+## React Compiler
 
-ProjectList (компонент без состояния): отвечает исключительно за отображение списка карточек проектов, которые он получает от родительского компонента.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-3. Функциональные требования
-1. Инициализация:
+## Expanding the ESLint configuration
 
-Компонент Portfolio при инициализации содержит полный список проектов и устанавливает фильтр по умолчанию в "All".
-2. Взаимодействие Portfolio и Toolbar:
-
-Portfolio передаёт в Toolbar список уникальных категорий для фильтров через пропс filters.
-
-Portfolio передаёт в Toolbar текущий активный фильтр через пропс selected.
-
-Portfolio передаёт в Toolbar функцию-обработчик для смены фильтра через пропс onSelectFilter.
-
-Пример использования компонента Toolbar:
-
-<Toolbar
-  filters={["All", "Websites", "Flayers", "Business Cards"]}
-  selected="All"
-  onSelectFilter={(filter) => {console.log(filter);}}/>
-В этом примере при выборе фильтра его название будет выведено в консоль. Например, «Business Cards».
-
-3. Обработка действий пользователя:
-
-При нажатии на кнопку фильтра в Toolbar вызывается переданный обработчик onSelectFilter, который получает в качестве аргумента название выбранной категории (например, "Websites").
-
-В Toolbar активный фильтр должен визуально выделяться (например, другим цветом фона или текста).
-
-4. Управление состоянием:
-
-Получив новый фильтр, Portfolio обновляет своё внутреннее состояние (state), сохраняя новое значение активного фильтра.
-5. Фильтрация и отображение проектов:
-
-Компонент Portfolio фильтрует общий список проектов в соответствии с активным фильтром из своего состояния.
-
-Отфильтрованный список проектов передаётся в компонент ProjectList через пропс projects.
-
-ProjectList отображает полученный список проектов.
-
-Пример: portfolio-cards.png
-
-4. Требования к коду
-Компонент Portfolio должен быть реализован как классовый компонент для управления состоянием.
-
-Компоненты Toolbar и ProjectList должны быть функциональными (stateless) компонентами.
-
-Для передачи данных от родителя к дочерним компонентам используйте пропсы (props).
-
-Для передачи данных от дочернего компонента (Toolbar) к родителю (Portfolio) используйте механизм обратного вызова (callback function).
-
-Набор данных для отображения
-5. Критерии оценивания
-Зачёт:
-
-Приложение полностью разделено на три компонента (Portfolio, Toolbar, ProjectList).
-
-Состояние (state) хранится и изменяется только в главном компоненте Portfolio.
-
-Данные и функции-обработчики корректно передаются через пропсы.
-
-Фильтрация проектов работает при клике на кнопки, список обновляется.
-
-Активный фильтр визуально выделен.
-
-На доработку:
-
-Архитектура приложения не соответствует заданию (неверное количество или иерархия компонентов).
-
-Обнаружены ошибки в управлении состоянием (например, state используется в Toolbar или ProjectList).
-
-Приложение не реагирует на действия пользователя или работает с ошибками.
-
-Внешний вид не соответствует макету (например, активный фильтр не выделен).
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
